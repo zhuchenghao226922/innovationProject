@@ -1320,6 +1320,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         # 设置跳转单样本动作的文本和触发时的槽函数
         self.action_t_2.triggered.connect(self.open_two_sample_t_test_window) #打开双样本界面
+        self.action_N_4.triggered.connect(self.open_A_D_window)
         self.action_N_15.triggered.connect(self.open_cpk_ppk_window)  #打开CPK-PPK界面
         self.action_t_1.triggered.connect(self.open_t_test_window3)#打开单样本界面
         self.action_R_R_G.triggered.connect(self.open_gr_r_window) #打开GR-R界面
@@ -1751,6 +1752,20 @@ class Ui_MainWindow(object):
         except Exception as e:
             print(f"创建或显示窗口时出错: {e}")
     ###打开CPK-PPK界面实现
+
+    def open_A_D_window(self):
+        try:
+            import A_D
+            print("成功导入 A_D 模块")
+            self.fourth = A_D.Ui_MainWindow(self)
+            print("成功创建 Ui_MainWindow 实例")
+            self.fourth.show()
+            print("已调用 show() 方法显示窗口")
+        except ImportError as e:
+            print(f"导入模块时出错: {e}")
+        except Exception as e:
+            print(f"创建或显示窗口时出错: {e}")
+
     def open_cpk_ppk_window(self):
             try:
                 import cpk_ppk
