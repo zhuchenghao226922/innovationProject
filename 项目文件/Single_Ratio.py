@@ -159,9 +159,15 @@ class Ui_MainWindow(QMainWindow):
     # 获取选中的列名，将其显示到textEdit中
     def show_selected_column_names(self):
         selected_indexes = self.listView_11.selectedIndexes()
+        if not selected_indexes:
+            return  # 如果没有选中任何列名，直接返回
         selected_names = [self.listView_11.model().itemFromIndex(index).text() for index in selected_indexes]
-        names_text = ", ".join(selected_names)
-        self.textEdit.setPlainText(names_text)
+        current_text = self.textEdit.toPlainText()
+        if current_text:
+            new_text = current_text + ", " + ", ".join(selected_names)
+        else:
+            new_text = ", ".join(selected_names)
+        self.textEdit.setPlainText(new_text)
 
     # 获取选中的列名下的数据，对数据进行单比率检验，最后将分析后的数据传回主界面中
     def perform_single_ratio_test(self):
