@@ -1729,7 +1729,9 @@ class Ui_MainWindow(object):
         self.action_N_15.setText(_translate("MainWindow", "正态(N)\n"
                                                           ""))
         self.action_R_R_G.setText(_translate("MainWindow", "量具 R&R 研究(交叉)(G)"))
-
+        # 设置跳转kmeans动作的文本和触发时的槽函数
+        self.actionKmeans.setText(_translate("MainWindow", "kmeans"))
+        self.actionKmeans.triggered.connect(self.open_means_window)
     ###Test模块试例
     # def open(self):
     #     import untitled2, untitled3
@@ -1801,6 +1803,20 @@ class Ui_MainWindow(object):
             print(f"导入模块时出错: {e}")
         except Exception as e:
             print(f"创建或显示窗口时出错: {e}")
+    ## K-means 实现
+    def open_means_window(self):
+        try:
+            import kmeans
+            print("成功导入 GR_R 模块")
+            self.second = kmeans.Ui_MainWindow(self)
+            print("成功创建 Ui_MainWindow 实例")
+            self.second.show()
+            print("已调用 show() 方法显示窗口")
+        except ImportError as e:
+            print(f"导入模块时出错: {e}")
+        except Exception as e:
+            print(f"创建或显示窗口时出错: {e}")
+
     ##单因子方差分析
     def open_single_factor_window(self):
         """单因子方差分析"""
